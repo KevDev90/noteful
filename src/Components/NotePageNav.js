@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import {withRouter} from 'react-router-dom';
 import NotefulContext from "../NotefulContext";
-
 class NotePageNav extends Component {
-
     static defaultProps = {
-        
         match: {
           params: {}
         }
-    }
-
+      }
     static contextType = NotefulContext;
 
     render() {
@@ -37,5 +33,4 @@ class NotePageNav extends Component {
         )
     }
 }
-
 export default withRouter(NotePageNav);

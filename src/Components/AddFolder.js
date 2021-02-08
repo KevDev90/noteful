@@ -18,6 +18,10 @@ class AddFolder extends Component {
         this.setState({name: folder, touched: true})
     }
 
+    handleClickCancel = () => {
+        this.props.history.push('/')
+    }
+
     validateFolder() {
         const folder = this.state.name.trim();
         if (folder.length === 0) {
@@ -67,7 +71,10 @@ class AddFolder extends Component {
                         <ValidationError message={this.validateFolder()}/>}
                 </div>
                 <div className='form-button-group'>
-                    <button type='reset' className='form-button'>Cancel</button>
+                <button 
+                        type='reset' 
+                        className='form-button'
+                        onClick={this.handleClickCancel}>Cancel</button>
                     <button type='submit' className='form-button' disabled={this.validateFolder()}>Add Folder</button>
                 </div>
             </form>

@@ -6,11 +6,10 @@ class AddNote extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: {value: '', touched: false},
-            content: {value: ''},
-            folder: {value: ''},
-            modified: {value: ''}
-
+            name:'',
+            content: '',
+            folderId: '',
+            modified: '',
         }
     }
 
@@ -18,54 +17,61 @@ class AddNote extends Component {
 
 
     updateName(name) {
-        this.setState({name: {value: name, touched: true}})
+        this.setState({name: name})
     }
     updateContent(content) {
-        this.setState({content: {value: content}})
+        this.setState({content: content})
     }
-    updateFolder(folder) {
-        this.setState({folder: {value: folder}})
+    updateFolder(folderId) {
+        this.setState({folderId: folderId})
+    }
+
+    handleClickCancel = () => {
+        this.props.history.push('/')
+    }
+
+    handleClickSubmit = () => {
+        const modifiedDate = new Date().toISOString();
+        this.setState({modified: modifiedDate})
     }
 
     validateName() {
-        const name = this.state.name.value.trim();
+        const name = this.state.name.trim();
         if(name.length === 0) {
             return 'Name is required'
         }
     }
 
-    // handleSubmit(event) {
-    //     event.preventDefault();
-    //     const modifiedDate = new Date().toISOString();
-    //     this.setState({modified: {value: modifiedDate}})
-    //     console.log(this.state);
+    handleSubmit(event) {
+        event.preventDefault();
+        console.log(this.state);
 
-    //     fetch(`http://localhost:9090/folders`, {
-    //         method: 'POST',
-    //         body: JSON.stringify(this.state),
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //     })
-    //         .then(response => {
-    //             console.log(response)
-    //             if (!response.ok)
-    //                 return response.json().then(e => Promise.reject(e))
-    //             return response.json()
-    //         })
-    //         .then((data) => {
-    //             this.context.addNote(data)
-    //             this.props.history.push('/')
-    //         })
-    //         .catch(error => {
-    //             console.error({error})
-    //         })
-    // }
+        fetch(`http://localhost:9090/folders`, {
+            method: 'POST',
+            body: JSON.stringify(this.state),
+            headers: {
+                'content-type': 'application/json'
+            },
+        })
+            .then(response => {
+                console.log(response)
+                if (!response.ok)
+                    return response.json().then(e => Promise.reject(e))
+                return response.json()
+            })
+            .then((data) => {
+                this.context.addNote(data)
+                this.props.history.push('/')
+            })
+            .catch(error => {
+                console.error({error})
+            })
+    }
 
 
     render() {
         const options = this.context.folders.map((folder) =>
-        <option key={folder.id} value={folder.name}>{folder.name}</option>
+        <option key={folder.id} value={folder.id}>{folder.name}</option>
     )
 
         return (
@@ -80,7 +86,7 @@ class AddNote extends Component {
                         name='name'
                         id='name'
                         onChange={e => this.updateName(e.target.value)}/>
-                        {this.state.name.touched &&
+                        {this.state.name &&
                         <ValidationError message={this.validateName()}/>}
                     <label htmlFor='content'>Content</label>
                     <textarea 
@@ -89,15 +95,17 @@ class AddNote extends Component {
                     <select
                         className='note-folder'
                         name='folder'
-                        onChange={e => this.updateFolder(e.target.value)}>
+                        onChange={e => this.updateFolder(e.target.value, e.target.folderId)}>
                         <option></option>
                             {options}
                         </select>
                 </div>
                 <div className='form-button-group'>
-                    <button type='reset' className='form-button'>Cancel</button>
+                    <button type='reset' className='form-button'
+                        onClick={this.handleClickCancel}>Cancel</button>
                     <button 
-                        type='submit' 
+                        type='submit'
+                        onClick={this.handleClickSubmit} 
                         className='form-button'
                         disabled={this.validateName()}>Submit</button>
                 </div>
