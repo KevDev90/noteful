@@ -55,4 +55,11 @@ Note.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   modified: PropTypes.string.isRequired,
+  onDeleteNote: PropTypes.func,
+}
+
+Note.defaultProps ={
+  id: null,
+  name: null,
+  modified: null
 }

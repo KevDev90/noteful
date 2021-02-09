@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import NotefulContext from '../NotefulContext';
 import ValidationError from './ValidationError';
 import ErrorBoundary from './ErrorBoundary';
+import PropTypes from 'prop-types';
 
 class AddNote extends Component {
     constructor(props) {
@@ -137,3 +138,7 @@ class AddNote extends Component {
 }
 
 export default AddNote;
+
+AddNote.propTypes = {
+    history: PropTypes.object.isRequired,
+}
