@@ -10,3 +10,7 @@ function ValidationError(props) {
 }
 
 export default ValidationError;
+
+ValidationError.propTypes = {
+    message: PropTypes.string
+}
