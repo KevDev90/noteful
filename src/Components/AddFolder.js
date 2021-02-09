@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NotefulContext from '../NotefulContext';
 import ValidationError from './ValidationError';
+import PropTypes from 'prop-types';
 import ErrorBoundary from './ErrorBoundary';
 
 class AddFolder extends Component {
@@ -86,3 +87,9 @@ class AddFolder extends Component {
 }
 
 export default AddFolder;
+
+AddFolder.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func
+    }).isRequired
+}

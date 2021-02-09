@@ -140,5 +140,7 @@ class AddNote extends Component {
 export default AddNote;
 
 AddNote.propTypes = {
-    history: PropTypes.object.isRequired,
-}
+    history: PropTypes.shape({
+        push: PropTypes.func
+    }).isRequired,
+} 
