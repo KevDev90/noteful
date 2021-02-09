@@ -26,10 +26,12 @@ class NoteListNav extends Component {
                 <ul className='folder-list'>
                     {list}
                 </ul>
+                <button className='folder-add-button'>
                 <NavLink 
                     to='/addfolder' 
                     className='add-folder-link'
                     >Add Folder</NavLink>
+                </button>
             </div>
         )
     }

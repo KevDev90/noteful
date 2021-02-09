@@ -90,7 +90,7 @@ class App extends Component {
             </nav>
             </ErrorBoundary>
             <ErrorBoundary>
-            <main>
+            <main className='note-page-container'>
               <Route 
                 exact
                 path='/' 
