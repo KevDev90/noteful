@@ -8,7 +8,7 @@ class NotePageNav extends Component {
     static contextType = NotefulContext;
 
     render() {
-        const noteId = this.props.match.params;
+        const noteId = this.props.match.params.noteId;
         const {notes=[]} = this.context;
         const {folders=[]} = this.context;
         const getNote = (notes, noteId) =>
