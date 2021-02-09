@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NotefulContext from '../NotefulContext';
 import ValidationError from './ValidationError';
+import ErrorBoundary from './ErrorBoundary';
 
 class AddNote extends Component {
     constructor(props) {
@@ -89,6 +90,7 @@ class AddNote extends Component {
     )
 
         return (
+          <ErrorBoundary>
             <form className='note-form' onSubmit={e => this.handleSubmit(e)}>
                 <h2>Create New Note</h2>
                 <div className='note-form_required'>* required field</div>
@@ -129,6 +131,7 @@ class AddNote extends Component {
                         disabled={this.validateName() || this.validateContent() || this.validateFolder()}>Submit</button>
                 </div>
             </form>
+          </ErrorBoundary>
         )
     }
 }

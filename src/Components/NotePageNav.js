@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {withRouter} from 'react-router-dom';
 import NotefulContext from "../NotefulContext";
+
 class NotePageNav extends Component {
     static defaultProps = {
         match: {
@@ -28,7 +29,7 @@ class NotePageNav extends Component {
                     className='note-page-back-link'>
                         back
                 </button>
-                <h2 className='note-folder-name'>{currentFolder.name}</h2>
+                <h2 className='note-folder-name'>{currentFolder ? currentFolder.name : null}</h2>
             </nav>
         )
     }

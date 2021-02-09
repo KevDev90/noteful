@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NotefulContext from '../NotefulContext';
 import ValidationError from './ValidationError';
+import ErrorBoundary from './ErrorBoundary';
 
 class AddFolder extends Component {
     constructor(props) {
@@ -56,6 +57,7 @@ class AddFolder extends Component {
 
     render() {
         return (
+          <ErrorBoundary>
             <form className='folder-form' onSubmit={event => this.handleSubmit(event)}>
                 <h2>Create New Folder</h2>
                 <div className='folder-form_required'>* required field</div>
@@ -78,6 +80,7 @@ class AddFolder extends Component {
                     <button type='submit' className='form-button' disabled={this.validateFolder()}>Add Folder</button>
                 </div>
             </form>
+          </ErrorBoundary>
         )
     }
 }
