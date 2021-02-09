@@ -58,8 +58,3 @@ Note.propTypes = {
   onDeleteNote: PropTypes.func,
 }
 
-Note.defaultProps ={
-  id: null,
-  name: null,
-  modified: null
-}

@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import {withRouter} from 'react-router-dom';
 import NotefulContext from "../NotefulContext";
+import PropTypes from 'prop-types';
 
 class NotePageNav extends Component {
-    static defaultProps = {
-        match: {
-          params: {}
-        }
-      }
+    
     static contextType = NotefulContext;
 
     render() {
-        const {noteId} = this.props.match.params;
+        const noteId = this.props.match.params;
         const {notes=[]} = this.context;
         const {folders=[]} = this.context;
         const getNote = (notes, noteId) =>
@@ -35,3 +32,14 @@ class NotePageNav extends Component {
     }
 }
 export default withRouter(NotePageNav);
+
+NotePageNav.propTypes = {
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            noteId: PropTypes.string
+        })
+    }).isRequired,
+    history: PropTypes.shape({
+        goBack: PropTypes.func
+    }).isRequired
+}
